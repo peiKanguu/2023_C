@@ -1,2 +1,2 @@
 ﻿  homework1.c
-D:\C_code\2023_c\homework_1_25\homework_1_25\homework1.c(8,2): error C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  homework_1_25.vcxproj -> D:\C_code\2023_c\homework_1_25\Debug\homework_1_25.exe
