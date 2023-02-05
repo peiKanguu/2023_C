@@ -9,59 +9,58 @@
 // 
 #include <math.h>
 ////////////////////////////////////////////////////正确示例
-void IsPrimeNumber(int n)
-{
-    int flag = 0;
-    for (int j = 2; j <= sqrt(n); j++)
-    {
-        if (n % j == 0)
-        {
-            flag++;
-            break;
-        }
-    }
-    if (flag == 0)
-    {
-        printf("%d ", n);
-    }
-}
-
-int main()
-{
-    int i;
-    for (i = 100; i <= 200; i++)
-    {
-        IsPrimeNumber(i);
-    }
-    return 0;
-}
-//////////////////////////////////////////////////////错误示例
-//#include <math.h>
 //void IsPrimeNumber(int n)
 //{
-//	int flag = 0;
-//	for (int j = 2; j < sqrt(n); j++)
-//	{
-//		if (n % j != 0)
-//		{
-//			flag++;                                 //错误原因：
-//		}		
-//	}
-//	if (flag == 0)
-//	{
-//		printf("%d ", n);
-//	}
+//    int flag = 0;
+//    for (int j = 2; j <= sqrt(n); j++)
+//    {
+//        if (n % j == 0)
+//        {
+//            flag++;
+//            break;
+//        }
+//    }
+//    if (flag == 0)
+//    {
+//        printf("%d ", n);
+//    }
 //}
 //
 //int main()
 //{
-//	int i;
-//	for (i = 100; i <= 200; i++)
-//	{
-//		IsPrimeNumber(i);
-//	}
-//	return 0;
+//    int i;
+//    for (i = 100; i <= 200; i++)
+//    {
+//        IsPrimeNumber(i);
+//    }
+//    return 0;
 //}
+#include <math.h>
+void IsPrimeNumber(int n)
+{
+	int flag = 0;
+	for (int j = 2; j < sqrt(n); j++)
+	{
+		if (n % j == 0)
+		{
+			flag++;                                 
+		}		
+	}
+	if (flag == 0)
+	{
+		printf("%d ", n);
+	}
+}
+
+int main()
+{
+	int i;
+	for (i = 100; i <= 200; i++)
+	{
+		IsPrimeNumber(i);
+	}
+	return 0;
+}
 
 
 
