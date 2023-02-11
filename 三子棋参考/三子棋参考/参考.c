@@ -69,14 +69,27 @@ void init_board()
 
 void print_board()
 {
-    int i, j;
-
-    printf("  0 1 2\n");
-    for (i = 0; i < ROWS; i++) {
-        printf("%d ", i);
+    int i = 0;
+    for (i = 0; i < ROWS; i++)
+    {
+        int j = 0;
         for (j = 0; j < COLS; j++)
-            printf("%c ", board[i][j]);
+        {
+            printf(" %c ", board[i][j]);
+            if (j < COLS - 1)
+                printf("|");
+        }
         printf("\n");
+        if (i < ROWS - 1)
+        {
+            for (j = 0; j < COLS; j++)
+            {
+                printf("---");
+                if (j < COLS - 1)
+                    printf("|");
+            }
+            printf("\n");
+        }
     }
 }
 
