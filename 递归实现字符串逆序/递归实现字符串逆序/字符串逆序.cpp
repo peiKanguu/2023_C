@@ -41,7 +41,7 @@
 //int main()
 //{
 //	char arr[] = "abcdef";
-//	char* str = arr;
+//	char* str = arr;,
 //
 //	reverse_string(str);
 //
@@ -125,10 +125,51 @@
 //
 //	return 0;
 //}
-#include <stdio.h>
+//#include <stdio.h>
+//int main()
+//{
+//    char str[] = "hello bit";
+//    printf("%d %d\n", sizeof(str), strlen(str));
+//    return 0;
+//}
+
+//void reverse_string(char* arr)
+//{
+//    char* left = arr;
+//    char* right = arr + strlen(arr) - 1;
+//
+//
+//    while (left < right)
+//    {
+//        char tmp = *left;
+//        *left = *right;
+//        *right = tmp;
+//
+//
+//        left++;
+//        right--;
+//    }
+//}
+void reverse_string(char* arr)
+{
+	int len = strlen(arr);
+	char tmp = *arr;
+	*arr = *(arr + len - 1);
+
+	*(arr + len - 1) = '\0';
+	if (strlen(arr + 1) >= 2)
+		reverse_string(arr + 1);
+
+	*(arr + len - 1) = tmp;
+}
 int main()
 {
-    char str[] = "hello bit";
-    printf("%d %d\n", sizeof(str), strlen(str));
+    char arr[] = "abcdef";
+   /* char* str = arr;*/
+
+    reverse_string(arr);
+
+    printf("%s", arr);
+
     return 0;
 }
