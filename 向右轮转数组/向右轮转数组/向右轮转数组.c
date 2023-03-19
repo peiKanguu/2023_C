@@ -1,6 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include <stdio.h>
+#include <string.h>
 
+//************************************************三段逆置
 void reverse(int nums[], int start, int end) {
     while (start < end) {
         int temp = nums[start];
@@ -38,6 +40,19 @@ void rotate2(int nums[], int numsSize, int k)
 }
 
 
+//********************************************新开一个数组，将后k存在前面，前k-1存在后面==>空间O(N)换时间O(N)
+void rotate3(int* nums, int numsSize, int k)
+{
+    k = k % numsSize;
+    int* tmp = (int*)malloc(sizeof(int) * numsSize);
+
+    memcpy(tmp, nums+numsSize - k, sizeof(int) * k);
+    memcpy(tmp + k, nums, sizeof(int) * (numsSize - k));
+    memcpy(nums, tmp, sizeof(int) * (numsSize));
+
+    free(tmp);
+}
+
 
 int main() {
     int nums[] = { 1, 2, 3, 4, 5, 6, 7 };
@@ -50,7 +65,8 @@ int main() {
     }
 
     //rotate1(nums, numsSize, k);
-    rotate2(nums, numsSize, k);
+    //rotate2(nums, numsSize, k);
+    rotate3(nums, numsSize, k);
 
     printf("\nRotated Array: ");
     for (int i = 0; i < numsSize; i++) {

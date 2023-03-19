@@ -25,13 +25,26 @@ ListNode* ListInit()
 	return phead;
 }
 
-void ListDestory(ListNode* pHead);
+void ListDestory(ListNode* phead)
+{
+	assert(phead);
+
+	ListNode* cur = phead->next;
+	while (cur != phead)
+	{
+		ListNode* next = cur->next;
+		free(cur);
+		cur = next;
+	}
+
+	free(phead);
+}
 
 void ListPrint(ListNode* phead)
 {
 	assert(phead);
 
-	printf("head <=>");
+	printf("head<=>");
 	ListNode* cur = phead->next;
 	while (cur != phead)
 	{
@@ -45,13 +58,15 @@ void ListPushBack(ListNode* phead, LTDataType x)
 {
 	assert(phead);
 
-	ListNode* newnode = BuyListNode(x);
-	ListNode* tail = phead->prev;
+	//ListNode* newnode = BuyListNode(x);
+	//ListNode* tail = phead->prev;
 
-	tail->next = newnode;
-	newnode->prev = tail;
-	newnode->next = phead;
-	phead->prev = newnode;
+	//tail->next = newnode;
+	//newnode->prev = tail;
+	//newnode->next = phead;
+	//phead->prev = newnode;
+
+	ListInsert(phead, x);
 }
 
 bool LTEmpty(ListNode* phead)
@@ -65,13 +80,15 @@ void ListPopBack(ListNode* phead)
 	assert(phead);
 	assert(!LTEmpty(phead));
 
-	ListNode* tail = phead->prev;
-	ListNode* tailPrev = tail->prev;
+	//ListNode* tail = phead->prev;
+	//ListNode* tailPrev = tail->prev;
 
-	tailPrev->next = phead;
-	phead->prev = tailPrev;
-	free(tail);
-	tail = NULL;
+	//tailPrev->next = phead;
+	//phead->prev = tailPrev;
+	//free(tail);
+	//tail = NULL;
+
+	ListErase(phead->prev);
 }
 
 void ListPushFront(ListNode* phead, LTDataType x)
@@ -94,16 +111,34 @@ void ListPopFront(ListNode* phead)
 	assert(phead);
 	assert(!LTEmpty(phead));
 
-	ListNode* first = phead->next;
-	ListNode* firstNext = first->next;
+	//ListNode* first = phead->next;
+	//ListNode* firstNext = first->next;
 
-	firstNext->prev = phead;
-	phead->next = firstNext;
-	free(first);
-	first = NULL;
+	//firstNext->prev = phead;
+	//phead->next = firstNext;
+	//free(first);
+	//first = NULL;
+
+	ListErase(phead->next);
 }
-// 双向链表查找
-ListNode* ListFind(ListNode* pHead, LTDataType x);
+
+ListNode* ListFind(ListNode* phead, LTDataType x)// 双向链表查找,配合Insert和Erase使用
+{
+	assert(phead);
+
+	ListNode* cur = phead->next;
+	while (cur != phead)
+	{
+		if (cur->data == x)
+		{
+			return cur;
+		}
+
+		cur = cur->next;
+	}
+
+	return NULL;
+}
 
 void ListInsert(ListNode* pos, LTDataType x)
 {
@@ -118,5 +153,15 @@ void ListInsert(ListNode* pos, LTDataType x)
 	newnode->next = pos;
 	pos->prev = newnode;
 }
-// 双向链表删除pos位置的节点
-void ListErase(ListNode* pos);
+
+void ListErase(ListNode* pos)
+{
+	assert(pos);
+
+	ListNode* prev = pos->prev;
+	ListNode* next = pos->next;
+
+	prev->next = next;
+	next->prev = prev;
+	free(pos);
+}
