@@ -121,14 +121,93 @@ int HeapSize(Heap* php)
 
 void HeapDestory(Heap* php)
 {
+	assert(php);
 
+	free(php->a);
+	php->a = NULL;
+	php->size = php->capacity = 0;
 }
 
-void PrintTopK(int* a, int n, int k)
+// 排升序 -- 建大堆 -- O(N*logN)
+void HeapSort(int* a, int n)
 {
+	// 建堆 -- 向上调整建堆 -- O(N*logN)
+	/*for (int i = 1; i < n; ++i)
+	{
+		AdjustUp(a, i);
+	}*/
 
+	// 建堆 -- 向下调整建堆 -- O(N)
+	for (int i = (n - 1 - 1) / 2; i >= 0; --i)
+	{
+		AdjustDown(a, n, i);
+	}
+
+	// 自己先实现 -- O(N*logN)
+	int end = n - 1;
+	while (end > 0)
+	{
+		Swap(&a[end], &a[0]);
+		AdjustDown(a, end, 0);
+
+		--end;
+	}
 }
-void TestTopk()
+
+void PrintTopK(int* a,int n, int k)
 {
+	// 1. 建堆--用a中前k个元素建小堆
+	int* topk = (int*)malloc(sizeof(int) * k);
+	assert(topk);
 
+	// 读出前k个数据建小堆
+	for (int i =0; i < k; ++i)
+	{
+		topk[i] = a[i];
+	}
+
+	for (int i = (k - 2) / 2; i >= 0; --i)
+	{
+		AdjustDown(topk, k, i);
+	}
+
+	// 2. 将剩余n-k个元素依次与堆顶元素交换，不满则则替换
+	for (int i = k; i < n; i++)
+	{
+		if (a[i] > topk[0])
+		{
+			topk[0] = a[i];
+			AdjustDown(topk, k, 0);
+		}
+	}
+
+	for (int i = 0; i < k; i++)
+	{
+		printf("%d ", topk[i]);
+	}
+	printf("\n");
+
+	free(topk);
 }
+
+//void CreateNDate()
+//{
+//	// 造数据
+//	int n = 10000000;
+//	srand(time(0));
+//	const char* file = "data.txt";
+//	FILE* fin = fopen(file, "w");
+//	if (fin == NULL)
+//	{
+//		perror("fopen error");
+//		return;
+//	}
+//
+//	for (size_t i = 0; i < n; ++i)
+//	{
+//		int x = rand() % 10000;
+//		fprintf(fin, "%d\n", x);
+//	}
+//
+//	fclose(fin);
+//}
