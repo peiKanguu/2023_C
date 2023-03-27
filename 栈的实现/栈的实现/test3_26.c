@@ -103,12 +103,20 @@ int main()
 	StackPush(ps, 2);
 	StackPush(ps, 3);
 	StackPush(ps, 4);
-	StackPush(ps, 5);
 	StackPrint(ps);
-	printf("\n\n");
+	printf("\n");
+
+	int TOP = StackTop(ps);
+	printf("栈顶元素是%d\n", TOP);
 
 	StackPop(ps);
 	StackPrint(ps);
+	printf("\n");
+
+	if (!StackEmpty(ps))
+	{
+		printf("栈不为空\n");
+	}
 	
 	StackDestroy(ps);
 }

@@ -8,8 +8,16 @@ void test()
 	myQueuePush(obj, 2);
 	myQueuePush(obj, 3);
 	myQueuePush(obj, 4);
-	
-	int n= myQueuePop(obj);
+
+	int x = myQueuePeek(obj);
+	printf("%d\n", x);
+	printf("\n");
+
+	printf("%d\n",myQueuePop(obj));
+	printf("%d\n", myQueuePop(obj));
+	printf("%d\n", myQueuePop(obj));
+	printf("%d\n", myQueuePop(obj));
+
 
 	myQueueFree(obj);
 

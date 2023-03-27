@@ -24,4 +24,3 @@ bool StackEmpty(Stack* ps);
 
 void StackDestroy(Stack* ps);
 
-void StackPrint(Stack* ps);

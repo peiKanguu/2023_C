@@ -70,8 +70,3 @@ bool StackEmpty(Stack* ps)
 
 	return ps->top == 0;
 }
-
-void StackPrint(Stack* ps)
-{
-
-}

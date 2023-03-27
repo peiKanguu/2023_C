@@ -23,4 +23,3 @@ bool myQueueEmpty(MyQueue* obj);//判断队列是否为空
 
 void myQueueFree(MyQueue* obj);//释放队列
 
-void myQueuePrint(MyQueue* obj);

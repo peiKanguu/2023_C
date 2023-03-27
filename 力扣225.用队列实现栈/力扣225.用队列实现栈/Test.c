@@ -2,24 +2,26 @@
 #include "myStack.h"
 #include "Queue.h"
 
-void test()
+
+int main()
 {
 	MyStack* p = myStackCreate();
 	myStackPush(p, 1);
 	myStackPush(p, 2);
 	myStackPush(p, 3);
 	myStackPush(p, 4);
+	printf("%d\n", myStackTop(p));
+
+	if (!myStackEmpty(p))
+	{
+		printf("Õ»²»Îª¿Õ\n");
+	}
 
 	myStackPop(p);
-
-	myStackTop(p);
+	myStackPop(p);
+	printf("%d\n", myStackTop(p));
 
 	myStackFree(p);
-}
-
-int main()
-{
-	test();
 	return 0;
 }
 
