@@ -67,12 +67,35 @@ void ShellSort(int* a, int n)
 
 }
 
+void InsertSort(int* a, int n)
+{
+	for (int i = 1; i < n; i++)
+	{
+		int end = i-1;
+		int tmp = a[end + 1];
+		while (end >= 0)
+		{
+			if (tmp < a[end])
+			{
+				a[end + 1] = a[end];
+				--end;
+			}
+			else
+			{
+				break;
+			}
+		}
+		a[end + 1] = tmp;
+	}
+}
+
 int main()
 {
 	int arr[] = { 1,3,2,6,8,9,5,0,5,6 };
 	int size = sizeof(arr) / sizeof(int);
 
-	ShellSort(arr, size);
+	//ShellSort(arr, size);
+	InsertSort(arr, size);
 	for (int i = 0; i < size; i++)
 	{
 		printf("%d ", arr[i]);
