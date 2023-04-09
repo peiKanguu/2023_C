@@ -65,6 +65,65 @@ void BubbleSort(int* a, int n)
 	}
 }
 
+int GetMidnumi(int* a, int left, int right)
+{
+	int mid = (left + right) / 2;
+	if (a[left] < a[mid])
+	{
+		if (a[mid] < a[right])
+		{
+			return mid;
+		}
+		else if (a[right] < a[left])
+		{
+			return left;
+		}
+		else
+			return right;
+	}
+	if (a[right] < a[mid])
+	{
+		if (a[mid] < a[left])
+		{
+			return mid;
+		}
+		else if (a[left] < a[right])
+		{
+			return right;
+		}
+		else
+			return left;
+	}
+}
+
+void QuickSort(int* a, int left, int right)
+{
+	if (left >= right)
+		return;
+
+	//int mid = GetMidnumi(a, left, right);
+	//if (mid != left)
+	//	Swap(&a[mid], &a[left]);
+
+	int key = left;
+	int begin = left, end = right;
+
+	while (left < right)
+	{
+		while (left<right && a[right] >= a[key])
+			right--;
+		while (left<right && a[left] <= a[key])
+			left++;
+		Swap(&a[right], &a[left]);
+	}
+
+	Swap(&a[key], &a[left]);
+	key = left;
+
+	QuickSort(a, begin, key - 1);
+	QuickSort(a, key + 1, end);
+}
+
 int main()
 {
 	int arr[] = { 4,5,3,3,1,2,8,9,7,6 };
@@ -72,6 +131,7 @@ int main()
 
 	//HeapSort(arr, size);
 	//BubbleSort(arr, size);
+	QuickSort(arr, 0, size-1);
 
 	for (int i = 0; i < size; i++)
 	{
