@@ -74,8 +74,8 @@ int StackTop(Stack* ps)
 void StackPrint(Stack* ps)
 {
 	assert(ps);
-	int i = ps->top-1;
-	while (i>=0)
+	int i = ps->top - 1;
+	while (i >= 0)
 	{
 		printf("%d\n", ps->a[i]);
 		i--;

@@ -6,8 +6,8 @@
 #include "BinaryTree.h"
 
 typedef struct QNode {
-	char data;
-	struct Node* next;
+	struct BTNode* data;
+	struct QNode* next;
 }QNode;
 
 typedef struct Queue {
@@ -33,8 +33,39 @@ typedef struct Queue {
 
 void QueueInit(Queue* pq);//创建队列
 
-void QueuePush(Queue* q, char x);//入队
+void QueuePush(Queue* q, struct BTNode* x);//入队
 
 void QueuePop(Queue* q);//出队
 
-bool isEmpty(Queue* q);//判断是否为空
+bool QueueIsEmpty(Queue* q);//判断是否为空
+
+struct BTNode* QueueFront(Queue* q);
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<stdbool.h>
+//#include<assert.h>
+//
+//typedef struct BinaryTreeNode* QDatatype;
+//
+//typedef struct QueueNode
+//{
+//	struct QueueNode* next;
+//	QDatatype data;
+//}QNode;
+//
+//typedef struct Queue
+//{
+//	QNode* head;
+//	QNode* tail;
+//	int size;
+//}Queue;
+//
+//// 10:40
+//void QueueInit(Queue* pq);
+//void QueueDestroy(Queue* pq);
+//void QueuePush(Queue* pq, QDatatype x);
+//void QueuePop(Queue* pq);
+//int QueueSize(Queue* pq);
+//bool QueueEmpty(Queue* pq);
+//QDatatype QueueFront(Queue* pq);
+//QDatatype QueueBack(Queue* pq);

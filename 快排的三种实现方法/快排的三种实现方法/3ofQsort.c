@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS 1
-#include<stdio.h>
+#include"Stack.h"
 
 void Swap(int* a, int* b)
 {
@@ -42,7 +42,7 @@ int GetMidnumi(int* a, int left, int right)
 
 
 //霍尔法
-int Qsort1(int* a, int left, int right)
+int Partsort1(int* a, int left, int right)
 {
 	int mid = GetMidnumi(a, left, right);
 	if (mid != left)
@@ -67,7 +67,7 @@ int Qsort1(int* a, int left, int right)
 
 
 //挖坑法
-int Qsort2(int* a, int left, int right)
+int Partsort2(int* a, int left, int right)
 {
 	int mid = GetMidnumi(a, left, right);
 	if (mid != left)
@@ -99,7 +99,7 @@ int Qsort2(int* a, int left, int right)
 
 
 //前后指针法
-int Qsort3(int* a, int left, int right)
+int Partsort3(int* a, int left, int right)
 {
 	int mid = GetMidnumi(a, left, right);
 	if (mid != left)
@@ -110,16 +110,15 @@ int Qsort3(int* a, int left, int right)
 
 	while (cur <= right)
 	{
-		while ( a[cur] < a[key])
+		if ( a[cur] < a[key])
 		{
 			++prev;
 			if (a[prev] != a[cur])
 			{
 				Swap(&a[cur], &a[prev]);
 			}
-			++cur;
 		}
-
+		++cur;
 	}
 
 	Swap(&a[prev], &a[key]);
@@ -131,11 +130,41 @@ void QuickSort(int* a, int left, int right)
 {
 	if (left >= right)
 		return;
-	//int key = Qsort1(a, left, right);
-	//int key = Qsort2(a, left, right);
-	int key = Qsort3(a, left, right);
+	//int key = Partsort1(a, left, right);
+	//int key = Partsort2(a, left, right);
+	int key = Partsort3(a, left, right);
 	QuickSort(a, left, key - 1);
 	QuickSort(a, key + 1, right);
+}
+
+ //快速排序 非递归实现
+void QuickSortNonR(int* a, int left, int right)
+{
+	Stack st;
+	StackInit(&st);
+	StackPush(&st, right);
+	StackPush(&st, left);
+
+	while (!StackEmpty(&st))
+	{
+		int begin = StackTop(&st);
+		StackPop(&st);
+		int end = StackTop(&st);
+		StackPop(&st);
+
+		int key = Partsort3(a, begin, end);
+		if (key + 1 < end)
+		{
+			StackPush(&st, end);
+			StackPush(&st, key+1);
+		}
+		if (begin < key - 1)
+		{
+			StackPush(&st, key-1);
+			StackPush(&st, begin);
+		}
+	}
+	StackDestroy(&st);
 }
 
 int main()
@@ -143,7 +172,8 @@ int main()
 	int arr[] = { 3,2,1,8,4,9,6,5,7,7 };
 	int size = sizeof(arr) / sizeof(int);
 
-	QuickSort(arr, 0, size - 1);
+	//QuickSort(arr, 0, size - 1);
+	QuickSortNonR(arr, 0, size - 1);
 
 	for (int i = 0; i < size; i++)
 	{
